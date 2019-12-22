@@ -152,18 +152,19 @@ def find_clustered_embeddings(embeddings, distance_threshold, sample_threshold):
     assert cosine_sim.shape == norm.shape
     #应该对norm开根号才对
     cosine_sim /= np.sqrt(norm)
-    #将对角线元素填充为-1
+    #将对角线元素填充为-1，排除自身
     np.fill_diagonal(cosine_sim, -1.0)
     argmax_cos_sim = np.argmax(cosine_sim, axis=1)
     mod_cos_sim = cosine_sim
     for _ in range(sample_threshold - 1):
+        #寻找相似度最大的单词的索引
         argmax_cos_sim = np.argmax(cosine_sim, axis=1)
         mod_cos_sim[np.arange(mod_cos_sim.shape[0]), argmax_cos_sim] = -1
 
     max_cosine_sim = np.max(mod_cos_sim, axis=1)
-
+    #这里的意思是选出与10个以上单词余弦距离大于0.25的单词，即寻找紧密聚集的嵌入，返回单词所在行数
     return np.where(max_cosine_sim > distance_threshold)[0]
-
+#前1000个单词绘图展示
 num_points = 1000 # we will use a large sample space to build the T-SNE manifold and then prune it using cosine similarity
 tsne = TSNE(perplexity=30, n_components=2, init='pca', n_iter=5000)
 print('Fitting embeddings to T-SNE. This can take some time ...')
@@ -198,7 +199,7 @@ def plot(embeddings, labels):
         pylab.scatter(x, y, c=label_colors[klabel])
 
         pylab.annotate(label, xy=(x, y), xytext=(5, 2), textcoords='offset points',
-                       ha='right', va='bottom', fontsize=10)
+                       ha='right', va='bottom', fontsize=7)
 
     pylab.show()
 
