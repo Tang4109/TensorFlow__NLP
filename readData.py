@@ -46,7 +46,7 @@ def read_data(filename):
     return data
 
 words = read_data(filename)
-vocabulary_size = 50000
+vocabulary_size = 5000
 def build_dataset(words):
     count = [['UNK', -1]]
     # Gets only the vocabulary_size most common words as the vocabulary
