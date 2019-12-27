@@ -32,8 +32,9 @@ def maybe_download(url, filename, expected_bytes, force=False):
             'Failed to verify ' + filename + '. Can you get to it with a browser?')
     return filename
 
+
 url = 'http://www.evanjones.ca/software/'
-filename = maybe_download(url,'wikipedia2text-extracted.txt.bz2', 18377035,force=False)
+filename = maybe_download(url, 'wikipedia2text-extracted.txt.bz2', 18377035, force=False)
 
 
 def read_data(filename):
@@ -45,8 +46,11 @@ def read_data(filename):
         data.extend(file_string)
     return data
 
+
 words = read_data(filename)
 vocabulary_size = 50000
+
+
 def build_dataset(words):
     count = [['UNK', -1]]
     # Gets only the vocabulary_size most common words as the vocabulary
@@ -82,12 +86,14 @@ def build_dataset(words):
 
     return data, count, dictionary, reverse_dictionary
 
+
 data, count, dictionary, reverse_dictionary = build_dataset(words)
 print('Most common words (+UNK)', count[:5])
 print('Sample data', data[:10])
+
 del words  # Hint to reduce memory.
 
-#用pickle保存中间变量：
+# 用pickle保存中间变量：
 with open('data.pickle', 'wb') as handle:
     pickle.dump(data, handle, protocol=2)
 with open('count.pickle', 'wb') as handle:
