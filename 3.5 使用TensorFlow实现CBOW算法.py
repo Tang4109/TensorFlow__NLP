@@ -151,7 +151,7 @@ similarity = tf.matmul(valid_embeddings, tf.transpose(normalized_embeddings))
 
 # 运行算法
 num_steps = 100001  # 迭代次数
-cbow_losses = []
+cbow_loss = []
 
 # 执行图形
 with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
@@ -176,7 +176,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
             # 每训练2000次展示一次
             if step > 0:
                 average_loss = average_loss / 2000
-            cbow_losses.append(average_loss)
+            cbow_loss.append(average_loss)
             print('Average loss at step %d: %f' % (step + 1, average_loss))
             average_loss = 0
 
@@ -199,9 +199,9 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
 #保存最终目标词嵌入
 np.save('cbow_embeddings',cbow_final_embeddings)
 #保存损失变量以便绘图
-with open('cbow_losses.csv', 'wt') as f:
+with open('cbow_loss.csv', 'wt') as f:
     writer = csv.writer(f, delimiter=',')
-    writer.writerow(cbow_losses)
+    writer.writerow(cbow_loss)
 
 #绘图
 def find_clustered_embeddings(embeddings, distance_threshold, sample_threshold):
