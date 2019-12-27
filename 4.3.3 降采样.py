@@ -53,7 +53,7 @@ drop_examples = []
 
 # 降采样
 for w_i in data:
-    p_w_i = 1 - np.sqrt(1e5 / word_count_dictionary[w_i])
+    p_w_i = 1 - np.sqrt(1e4 / word_count_dictionary[w_i])
 
     if np.random.random() < p_w_i:
         drop_count += 1
