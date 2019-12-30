@@ -195,7 +195,9 @@ glove_loss = []
 skip_window = 4 # How many words to consider left and right.
 
 average_loss = 0
-with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
+Config=tf.ConfigProto(allow_soft_placement=True)  ##:如果你指定的设备不存在,允许TF自动分配设备
+Config.gpu_options.allow_growth=True  ##动态分配内存
+with tf.Session(config=Config) as session:
     tf.global_variables_initializer().run()
     print('Initialized')
 
