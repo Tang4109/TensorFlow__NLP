@@ -190,7 +190,7 @@ similarity = tf.matmul(valid_embeddings, tf.transpose(normalized_embeddings))
 # Optimizer.
 optimizer = tf.train.AdagradOptimizer(1.0).minimize(loss)
 
-num_steps = 100001
+num_steps = 80001
 glove_loss = []
 skip_window = 4 # How many words to consider left and right.
 
@@ -327,6 +327,7 @@ def plot(embeddings, labels):
         pylab.annotate(label, xy=(x, y), xytext=(5, 2), textcoords='offset points',
                        ha='right', va='bottom', fontsize=7)
 
+    pylab.savefig('Glove.png')
     pylab.show()
 
 
