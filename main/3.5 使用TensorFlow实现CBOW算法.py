@@ -17,7 +17,7 @@ from urllib.request import urlretrieve
 import numpy as np
 import nltk
 import tensorflow.compat.v1 as tf
-
+import pdb
 tf.disable_eager_execution()
 import os
 # 用pickle读取中间变量：
@@ -66,13 +66,13 @@ def generate_batch_cbow(batch_size, window_size):
 
     return batch, labels
 
-
-# for window_size in [1, 2]:
-#     data_index = 0
-#     batch, labels = generate_batch_cbow(batch_size=8, window_size=window_size)
-#     print('\nwith window_size = %d:' % (window_size))
-#     print('    batch:', [[reverse_dictionary[bii] for bii in bi] for bi in batch])
-#     print('    labels:', [reverse_dictionary[li] for li in labels.reshape(8)])
+pdb.set_trace()
+for window_size in [1, 2]:
+    data_index = 0
+    batch, labels = generate_batch_cbow(batch_size=8, window_size=window_size)
+    print('\nwith window_size = %d:' % (window_size))
+    print('    batch:', [[reverse_dictionary[bii] for bii in bi] for bi in batch])
+    print('    labels:', [reverse_dictionary[li] for li in labels.reshape(8)])
 
 vocabulary_size = 50000
 batch_size = 128  # Data points in a single batch

@@ -56,9 +56,9 @@ def find_clustered_embeddings(embeddings, distance_threshold, sample_threshold):
 
 
 # Load the previously saved embeddings from Chapter 3 exercise
-emb_path = os.path.join('Glove_embeddings.npy')
+emb_path = os.path.join('../model/Glove_embeddings.npy')
 final_embeddings = np.load(emb_path)
-num_points = 1000 # we will use a large sample space to build the T-SNE manifold and then prune it using cosine similarity
+num_points = 2000 # we will use a large sample space to build the T-SNE manifold and then prune it using cosine similarity
 
 # Create a t-SNE object from scikit-learn
 tsne = TSNE(perplexity=30, n_components=2, init='pca', n_iter=5000)
@@ -71,7 +71,7 @@ print('Pruning the T-SNE embeddings')
 # Prune the embeddings by getting ones only more than n-many sample above the similarity threshold
 # this unclutters the visualization
 # Prune skip-gram
-selected_ids = find_clustered_embeddings(selected_embeddings,.3,10)
+selected_ids = find_clustered_embeddings(selected_embeddings,.25,10)
 two_d_embeddings = two_d_embeddings[selected_ids,:]
 
 # Some stats about pruning
@@ -98,7 +98,7 @@ def plot_embeddings(embeddings, labels):
         pylab.annotate(label, xy=(x, y), xytext=(5, 2), textcoords='offset points',
                        ha='right', va='bottom', fontsize=7)
 
-    pylab.savefig('Glove.png')
+    pylab.savefig('picture/Glove.png')
     pylab.show()
 
 
