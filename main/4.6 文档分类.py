@@ -152,7 +152,7 @@ num_steps = 100001
 cbow_loss = []
 
 config=tf.ConfigProto(allow_soft_placement=True)
-config.gpu_options.allow_growth = True
+# config.gpu_options.allow_growth = True
 
 with tf.Session(config=config) as session:
     tf.global_variables_initializer().run()
@@ -205,9 +205,9 @@ with tf.Session(config=config) as session:
 
 
 
-# # 用pickle保存中间变量：
-# with open('../data/document_embeddings.pickle', 'wb') as handle:
-#     pickle.dump(document_embeddings, handle, protocol=2)
+# 用pickle保存中间变量：
+with open('../data/document_embeddings1.pickle', 'wb') as handle:
+    pickle.dump(document_embeddings, handle, protocol=2)
 
 kmeans = KMeans(n_clusters=5, random_state=43643, max_iter=10000, n_init=100, algorithm='elkan')
 kmeans.fit(np.array(list(document_embeddings.values())))

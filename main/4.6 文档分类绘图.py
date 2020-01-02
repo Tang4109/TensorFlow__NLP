@@ -19,7 +19,7 @@ from sklearn.manifold import TSNE
 
 # emb_path = os.path.join('../model/document_embeddings.npy')
 # document_embeddings = np.load(emb_path,allow_pickle=True)
-with open('../data/document_embeddings.pickle', 'rb') as handle:
+with open('../data/document_embeddings1.pickle', 'rb') as handle:
     document_embeddings=pickle.load(handle)
 
 num_points = 1000
@@ -43,6 +43,7 @@ def plot(embeddings, labels):
     assert embeddings.shape[0] >= len(labels), 'More labels than embeddings'
 
     pylab.figure(figsize=(15, 15))  # in inches
+
 
     def get_label_id_from_key(key):
         '''
