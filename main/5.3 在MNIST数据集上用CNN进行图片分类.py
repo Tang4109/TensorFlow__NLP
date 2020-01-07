@@ -319,6 +319,7 @@ pylab.title('Softmax Predictions for Correctly Classified Samples', fontsize=24)
 # For 7 steps
 for sub_i in range(7):
     # Draw the top row (digit images)
+
     pylab.subplot(4, 7, sub_i + 1)
     pylab.imshow(np.squeeze(correctly_predicted[sub_i]), cmap='gray')
     pylab.axis('off')
@@ -349,5 +350,7 @@ for sub_i in range(7):
     pylab.xticks(x_axis, labels)
 
 # Save the figure
+
+
 pylab.savefig('mnist_results.png')
 pylab.show()
